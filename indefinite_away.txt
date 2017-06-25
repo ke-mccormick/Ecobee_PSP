@@ -1,0 +1,15 @@
+{
+  "selection": {
+    "selectionType":"registered",
+    "selectionMatch":""
+  },
+  "functions": [
+    {
+      "type":"setHold",
+      "params":{
+        "holdType":"indefinite",
+        "holdClimateRef":"away"
+      }
+    }
+  ]
+}

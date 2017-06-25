@@ -1,0 +1,7 @@
+{
+  "access_token": "6ym667oA4o1PMkDXgWihBiEqXMC2WXF9",
+  "token_type": "Bearer",
+  "expires_in": 3599,
+  "refresh_token": "MC2hBiWXFADXgWiEqX6ym667o94o1PMk",
+  "scope": "smartWrite"
+}
