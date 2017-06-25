@@ -42,7 +42,9 @@ https://curl.haxx.se/
 All files need to be in same directory.
 
 Usage: psp.py -n -p price
+
 	-n			Optional: 	Enables IFTTT notification.
+
 	-p price		Required: 	Defines the maximum Power Smart Pricing price.
 	
 Example: psp.py -n -p 4.3
