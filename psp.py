@@ -88,9 +88,9 @@ def press_ENTER_exit_message():
 
 # Print file usage statement.
 def usage():
-    print('Usage: psp.py -n -p price' + '\n')
-    print('-n        Optional: Enables IFTTT notification.'+ '\n')
-    print('-p price  Required: Defines the maximum Power Smart Pricing price.'+ '\n')
+    print('Usage: psp.py -n -p price')
+    print('-n        Optional: Enables IFTTT notification.')
+    print('-p price  Required: Defines the maximum Power Smart Pricing price.')
     return None
 
 # Clears the output window.
@@ -121,12 +121,14 @@ def main():
         print(err)
         usage()
         press_ENTER_exit_message()
+    # If no parameters.    
     if not opts:
+        print('option -p is required')
         usage()
         press_ENTER_exit_message()
 
     notify = False
-    max_price = -1
+    max_price = float(-1)
 
     for opt, arg in opts:
         if opt in ('-h','--help'):
@@ -135,12 +137,17 @@ def main():
         elif opt in ('-n', '--notify'):
             notify = True
         elif opt in ('-p', '--price'):
-            max_price = arg
+            try:
+               max_price = float(arg)
+            except ValueError:
+                usage()
+                press_ENTER_exit_message()  
         else:
             assert False, "unhandled option"
 
     # Max Price must be set.
     if(max_price == -1):
+        print('option -p is required')
         usage()
         press_ENTER_exit_message()
 
@@ -166,11 +173,11 @@ def main():
             clear_output_window()
         previous_hour = current_hour # Update previous hour to current hour.
         print('Update Triggered at ' + get_system_time().strftime('%H:%M:%S')) # Display Current Time
-        print('Max Price is ' + max_price) # Print Max Price
+        print('Max Price is ' + str(max_price)) # Print Max Price
         current_price = float(get_psp_price()) # Update Current Price
         print('Current Price is ' + str(current_price)) # Display Current Price
         # If current price is cheaper than max price, resume program else set away indefinitely.
-        if(current_price <= float(max_price)):
+        if(current_price <= max_price):
             print('Current Price Less Than Or Equal To Max Price')
             set_resume_program()
             # Notify once when price changed.
