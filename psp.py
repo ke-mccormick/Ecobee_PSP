@@ -7,7 +7,7 @@ import sys
 import time
 import urllib.request
 
-# Returns client id from file client_id.txt as string.
+# Returns file path as string.
 def get_file_path(file):
     file_path = os.path.join(sys.path[0], file)
     return file_path
