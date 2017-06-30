@@ -11,6 +11,7 @@ and will resume the programmed schedule when the price is equal or less than the
 
 The program also requires IFTTT webhooks called PSP_Price_High and PSP_Price_Low for notifications.
 Make sure the webhook names match the names listed above and configure the applets how ever you like be notified.
+
 https://ifttt.com/
 
 IFTTT can be slow, so do not expect notification right away.
@@ -31,19 +32,24 @@ tokens.txt is a JSON file that contains the tokens for access and token refresh 
 You will need to get the information contained in the files from Ecobee and IFTTT for your specific installation.
 
 Please begin with the Ecobee Developers page.
+
 https://www.ecobee.com/home/developer/api/introduction/index.shtml
 
 If you have questions, the Ecobee Developer Community maybe able to help you.
+
 http://developer.ecobee.com/api
 
 This application also requires the use of CURL, so be sure to have CURL installed.
+
 https://curl.haxx.se/
 
 All files need to be in same directory.
 
 Usage: psp.py -n -p price
-	-n			Optional: 	Enables IFTTT notification.
-	-p price		Required: 	Defines the maximum Power Smart Pricing price.
+
+	-n		Optional: Enables IFTTT notification.
+
+	-p price	Required: Defines the maximum Power Smart Pricing price.
 	
 Example: psp.py -n -p 4.3
 
