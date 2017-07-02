@@ -7,7 +7,7 @@ import sys
 import time
 import urllib.request
 
-# Returns file path as string.
+# Returns client id from file client_id.txt as string.
 def get_file_path(file):
     file_path = os.path.join(sys.path[0], file)
     return file_path
@@ -60,12 +60,12 @@ def execute_Ecobee_command_file(command_file):
     check_output(command, shell=True).decode()
     return None
 
-# IFTTT Notification
-def IFTTT_notify(message):
+# IFTTT Execute Event
+def IFTTT_execute(event):
     IFTTT_file = open(get_file_path('IFTTT_id.txt'), 'r')
     IFTTT_id = IFTTT_file.read()
-    notify = 'curl -s -X POST https://maker.ifttt.com/trigger/' + message + '/with/key/' + IFTTT_id
-    check_output(notify, shell=True).decode()
+    command = 'curl -s -X POST https://maker.ifttt.com/trigger/' + event + '/with/key/' + IFTTT_id
+    check_output(command, shell=True).decode()
     return None
 
 # Set Ecobee away indefinitely.
@@ -127,7 +127,7 @@ def main():
         usage()
         press_ENTER_exit_message()
 
-    notify = False
+    IFTTT_notify = False
     max_price = float(-1)
 
     for opt, arg in opts:
@@ -135,7 +135,7 @@ def main():
             usage()
             press_ENTER_exit_message()
         elif opt in ('-n', '--notify'):
-            notify = True
+            IFTTT_notify = True
         elif opt in ('-p', '--price'):
             try:
                max_price = float(arg)
@@ -181,15 +181,15 @@ def main():
             print('Current Price Less Than Or Equal To Max Price')
             set_resume_program()
             # Notify once when price changed.
-            if(notify == True and PSP_High != 0):
-                IFTTT_notify('PSP_Price_Low')
+            if(IFTTT_notify == True and PSP_High != 0):
+                IFTTT_execute('PSP_Price_Low_Notify')
             PSP_High = 0
         else:
             print('Current Price Greater Than Max Price')
             set_away_indefinitely()
             # Notify once when price changed.
-            if(notify == True and PSP_High != 1):
-                IFTTT_notify('PSP_Price_High')
+            if(IFTTT_notify == True and PSP_High != 1):
+                IFTTT_execute('PSP_Price_High_Notify')
             PSP_High = 1
         print('Please Wait For Next Hourly Update...')
 

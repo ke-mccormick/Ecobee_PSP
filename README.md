@@ -9,8 +9,8 @@ https://www.powersmartpricing.org/
 The purpose of this program is to set the Ecobee thermostat to Away if the PSP price is greater than a user defined pricing point,
 and will resume the programmed schedule when the price is equal or less than the user defined pricing point.
 
-The program also requires IFTTT webhooks called PSP_Price_High and PSP_Price_Low for notifications.
-Make sure the webhook names match the names listed above and configure the applets how ever you like be notified.
+The program also requires IFTTT webhooks called PSP_Price_High_Notify and PSP_Price_Low_Notify for notifications.
+Make sure the webhook event names match the names listed above and configure the applets however you like be notified.
 
 https://ifttt.com/
 
