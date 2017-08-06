@@ -174,7 +174,17 @@ def main():
         previous_hour = current_hour # Update previous hour to current hour.
         print('Update Triggered at ' + get_system_time().strftime('%H:%M:%S')) # Display Current Time
         print('Max Price is ' + str(max_price)) # Print Max Price
-        current_price = float(get_psp_price()) # Update Current Price
+        try: # Try getting PSP price.
+            current_price = float(get_psp_price()) # Update Current Price
+        except ValueError:
+            current_price = float(-1)
+        while(current_price == float(-1)): # Check if current_price was returned as an error.
+            print('Error getting current price and will try again in 15 seconds.') # Display error message.
+            time.sleep(15) # Delay for 15 seconds.
+            try: # Try getting PSP price again.
+                current_price = float(get_psp_price()) # Update Current Price
+            except ValueError:
+                current_price = float(-1)
         print('Current Price is ' + str(current_price)) # Display Current Price
         # If current price is cheaper than max price, resume program else set away indefinitely.
         if(current_price <= max_price):
